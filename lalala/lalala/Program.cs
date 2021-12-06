@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Globalization;
 using System.Text;
+using System.Threading;
 
 namespace lalala
 {
@@ -42,6 +44,36 @@ namespace lalala
             }
             stopWatch1.Stop();
             Console.WriteLine(stopWatch1.ElapsedMilliseconds);
+
+            //Substring
+            string mystring = "This is an awesome string, This is not easy";
+            int indexOfThis = mystring.IndexOf("This");
+            int lastIndexOf = mystring.LastIndexOf("This");
+
+            string path = "C:/Program Files/Windows";
+            string programFiles = path.Substring(3, 13);
+            string rest = path.Substring(3);
+
+            string pFiles = path.Substring(path.IndexOf("/") - 1, path.LastIndexOf("/") - path.IndexOf("/") - 1); //Program Files
+
+            //Split
+            var splitted = path.Split('/');
+
+            string replace = path.Replace("/", "//");
+            string removed = path.Remove(14);
+
+            int awesomeInt = 123456878;
+            string intToString = awesomeInt.ToString();
+
+            CultureInfo culture = new CultureInfo("tr-TR");
+            string awesomeCulture = awesomeInt.ToString("C", culture);
+
+            // asta de jos nu merge - tema .. de schimbat din string inapoi in int
+            Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
+            int oldInt = int.Parse(awesomeCulture);
+
+            string interpolated = $"This is an int: {awesomeInt}, in tr-TR culture is: {awesomeCulture}";
+
         }
     }
 }
